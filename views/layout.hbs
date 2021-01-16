@@ -65,6 +65,11 @@
 </head>
 
 <body>
+    <style>
+        .goAdvancedSearch{
+            min-height: 39.125px;
+        }
+    </style>
     <!-- top-header -->
     <div class="agile-main-top">
         <div class="container-fluid">
@@ -83,7 +88,96 @@
                 <div class="col-md-6 header mt-2 mb-md-0 mb-2">
                     <div class="row" style="padding-left: 100px;">
                         <!-- search -->
-                        <div class="col-10 agileits_search">
+                        <div class="col-10 agileits_search" id="normalSearch">
+                            <form id="searchDishesForm" name="searchDishesForm" class="form-inline input-group mb-2" action="/search" method="get">
+                                <div class="input-group-prepend">
+                                    <button id="goAdvancedSearch" class="goAdvancedSearch btn btn-outline-secondary dropdown-toggle"
+                                        type="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        Nâng cao
+                                    </button>
+                                    {{!-- <div class="dropdown-menu">
+                                        <a class="dropdown-item search-type-option" data-search-type-title="Món ăn" data-search-type="dishName">Món ăn</a>
+                                        <a class="dropdown-item search-type-option" data-search-type-title="Nguyên liệu" data-search-type="ingredientName">Nguyên liệu</a>
+                                        <a class="dropdown-item search-type-option" data-search-type-title="Dinh dưỡng" data-search-type="nutritionName">Dinh dưỡng</a>
+                                    </div> --}}
+                                </div>
+                                <input type="text" class="search-keyword form-control" placeholder="Tìm kiếm món ăn" id="normalSearchInput"
+                                    aria-label="search" aria-describedby="search dishes" 
+                                    name="{{#if searchType}}{{searchType}}{{else}}dishName{{/if}}" 
+                                    value="{{searchKeyword}}">
+                                <div class="input-group-append" id="normalSearchBtn">
+                                    <button type="submit" id="searchDishesSubmitBtn" class="btn">
+                                        <span class="input-group-text my-btn-bg-orange pl-3 pr-3">
+                                            <i class="fas fa-search" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- //header-bottom -->
+                <div class="col-lg-4 header-right mt-lg-0 mt-2 pt-1">
+                    <!-- header lists -->
+                    <ul class="pt-2 pb-2">
+                        {{#if user}}
+                        <li id="postRecipe" class="text-center border-right text-white">
+                            <a href="/post_recipe" class="text-white">
+                                <i class="fas fa-sticky-note mr-2"></i>Đăng Review</a>
+                        </li>
+                        <li id="postRecipe" class="text-center border-right text-white">
+                            <a href="" class="text-white">
+                                <i class="fa fa-bell mr-2"></i>Thông báo</a>
+                        </li>
+                        <li id="welcomeUser" class="text-center text-white">
+                            <div class="show">
+                                <a href="" class="text-white dropdown-toggle" id="profileDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-user mr-2"></i> Chào {{user.lastName}}</a>
+                                <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                                    <a class="dropdown-item" href="/profile">Trang cá nhân</a>
+                                    <a class="dropdown-item" href="/yourInfo">Hồ sơ</a>
+                                    <a class="dropdown-item" href="/changePwd">Thay đổi mật khẩu</a>
+                                    {{#ifCond user.userType '==' adminType}}
+                                        <a class="dropdown-item" href="/censorRecipe">Kiểm duyệt</a>
+                                    {{/ifCond}}
+                                    <a class="dropdown-item" href="/logout">Đăng xuất</a>
+                                </div>
+                            </div>
+                        </li>
+                        {{else}}
+                        <li id="login" class="text-center border-right text-white">
+                            <a href="/login" class="text-white">
+                                <i class="fas fa-sign-in-alt mr-2"></i> Đăng nhập </a>
+                        </li>
+                        <li id="signup" class="text-center text-white">
+                            <a href="/signup" class="text-white">
+                                <i class="fas fa-user-plus mr-2"></i> Đăng ký </a>
+                        </li>
+                        {{/if}}
+                    </ul>
+                    <!-- //header lists -->
+                </div>
+            </div>
+        </div>
+    <div class="container-fluid d-none" id="advancedSearchArea">
+            <div class="row main-top-w3l py-2">
+                <!-- logo -->
+                <div class="col-md-2" style="padding-left: 40px; visibility:hidden">
+                    <div>
+                        <a href="/" style="text-decoration:none; color: white;">
+                            <img src="/images/logo-foodbook.png">
+                        </a>
+                    </div>
+
+                </div>
+                <!-- //logo -->
+                <!-- header-bot -->
+                <div class="col-md-6 header mt-2 mb-md-0 mb-2">
+                    <div class="row" style="padding-left: 100px;">
+                        <!-- search -->
+                        <div class="col-10 agileits_search" id="advancedSearch">
                             <form id="searchDishesForm" name="searchDishesForm" class="form-inline input-group mb-2" action="/search" method="get">
                                 <div class="input-group-prepend">
                                     <button id="search-type-btn" class="search-type-display btn btn-outline-secondary dropdown-toggle"
@@ -112,49 +206,9 @@
                                         </span>
                                     </button>
                                 </div>
-                            </form>
+                            </form><a class="nav-link" href="/advanced_search">Tìm kiếm nâng cao</a>
                         </div>
                     </div>
-                </div>
-                <!-- //header-bottom -->
-                <div class="col-lg-4 header-right mt-lg-0 mt-2 pt-1">
-                    <!-- header lists -->
-                    <ul class="pt-2 pb-2">
-                        {{#if user}}
-                        <li id="welcomeUser" class="text-center border-right text-white">
-                            <div class="show">
-                                <a href="" class="text-white dropdown-toggle" id="profileDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-user mr-2"></i> Chào {{user.lastName}}</a>
-                                <div class="dropdown-menu" aria-labelledby="profileDropdown">
-                                    <a class="dropdown-item" href="/yourInfo">Hồ sơ</a>
-                                    <a class="dropdown-item" href="/changePwd">Thay đổi mật khẩu</a>
-                                    {{#ifCond user.userType '==' adminType}}
-                                        <a class="dropdown-item" href="/censorRecipe">Kiểm duyệt</a>
-                                    {{/ifCond}}
-                                </div>
-                            </div>
-                        </li>
-                        <li id="postRecipe" class="text-center text-white">
-                            <a href="/post_recipe" class="text-white">
-                                <i class="fas fa-sticky-note mr-2"></i>Công thức mới</a>
-                        </li>
-                        <li id="logout" class="text-center text-white">
-                            <a href="/logout" class="text-white">
-                                <i class="fas fa-sign-out-alt mr-2"></i> Đăng xuất</a>
-                        </li>
-                        {{else}}
-                        <li id="login" class="text-center border-right text-white">
-                            <a href="/login" class="text-white">
-                                <i class="fas fa-sign-in-alt mr-2"></i> Đăng nhập </a>
-                        </li>
-                        <li id="signup" class="text-center text-white">
-                            <a href="/signup" class="text-white">
-                                <i class="fas fa-user-plus mr-2"></i> Đăng ký </a>
-                        </li>
-                        {{/if}}
-                    </ul>
-                    <!-- //header lists -->
                 </div>
             </div>
         </div>
@@ -272,114 +326,18 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="agileits-navi_search">
-                    <!--                       <form action="/product" method="post">
-                          <select id="agileinfo-nav_search" name="agileinfo_search" class="border" required="">
-                              <option value="">Tất cả loại hàng</option>
-                              <option value="Televisions">Tivi</option>
-                              <option value="Headphones">Tai nghe</option>
-                              <option value="Computers">Máy tính</option>
-                              <option value="Appliances">Đồ gia dụng</option>
-                              <option value="Mobiles">Điện thoại</option>
-                              <option value="Fruits &amp; Vegetables">Tv &amp; Video</option>
-                              <option value="iPad & Tablets">iPad & Tablets</option>
-                              <option value="Cameras & Camcorders">Cameras & Camcorders</option>
-                          </select>
-                      </form> -->
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {{!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto text-center mr-xl-5">
-                        <li class="nav-item active mr-lg-2 mb-lg-0 mb-2">
-                            <a class="nav-link" href="/">Trang chủ
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <!--
-                        <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                Món ăn
-                            </a>
-                            <div class="dropdown-menu">
-                                <div class="agile_inner_drop_nav_info p-4">
-                                    <h5 class="mb-3"><a href="/product">Món ăn</a></h5>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-6 multi-gd-img">
-                                            <i class="fas fa-star" style="color: #FFD700"></i>
-                                            <a href="#">Top món ăn phổ biến</a>
-                                        </div>
-                                        <div class="col-sm-6 multi-gd-img">
-                                            <a href="#">Top món ăn tốt nhất</a>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-6 multi-gd-img">
-                                            <a href="#">Top món ăn dinh dưỡng</a>
-                                        </div>
-                                        <div class="col-sm-6 multi-gd-img">
-                                            <a href="#">Top quán ăn/nhà hàng</a>
-                                        </div>
-                                    </div>
-                                    {{#each categoryChunks}}
-                                    <div class="row mb-3">
-                                        {{#each this}}
-                                        <div class="col-sm-3 multi-gd-img">
-                                            <a href="/category/{{categoryId}}">{{categoryName}}</a>
-                                        </div>
-                                        {{/each}}
-                                    </div>
-                                    {{/each}}
-                                </div>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                Thành viên
-                            </a>
-                            <div class="dropdown-menu">
-                                <div class="agile_inner_drop_nav_info p-4">
-                                    <h5 class="mb-3"><a href="/product">Thành viên</a></h5>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-6 multi-gd-img">
-                                            <i class="fas fa-star" style="color: #FFD700"></i>
-                                            <a href="#">Đầu bếp nổi bật</a>
-                                        </div>
-                                        <div class="col-sm-6 multi-gd-img">
-                                            <a href="#">Bảng xếp hạng đầu bếp</a>
-                                        </div>
-                                    </div>
-                                    {{#each brandChunks}}
-                                    <div class="row mb-3">
-                                        {{#each this}}
-                                        <div class="col-sm-3 multi-gd-img">
-                                            <a href="/brand/{{brandId}}">{{name}}</a>
-                                        </div>
-                                        {{/each}}
-                                    </div>
-                                    {{/each}}
-                                </div>
-                            </div>
-                        </li>
-                        -->
                         <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
                             <a class="nav-link" href="/advanced_search">Tìm kiếm nâng cao</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact">Liên hệ</a>
-                        </li>
-                        {{#if user}}
-                        <li class="nav-item text-center border-left text-white">
-                            
-                            <a class="nav-link" href="/profile"><i class="fa fa-user mr-2 ml-2" aria-hidden="true"></i>Trang cá nhân</a>
-                        </li>
-                        {{/if}}
-                    </ul>
-                </div>
+                </div> --}}
             </nav>
         </div>
     </div>
@@ -650,6 +608,13 @@
                 mainClass: 'my-mfp-zoom-in'
             });
 
+            //$('#advancedSearchArea').addClass('d-none');
+        });
+
+        $('.goAdvancedSearch').on('click', function() {
+            $('#advancedSearchArea').toggleClass('d-none');
+            $('#normalSearchInput').toggleClass('d-none');
+            $('#normalSearchBtn').toggleClass('d-none');
         });
     </script>
     <!-- //popup modal (for location)-->

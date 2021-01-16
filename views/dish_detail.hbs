@@ -1,3 +1,23 @@
+<style>
+    .dish-instruction .dish-step .dish-step-image img {
+        width: auto;
+        height: auto;
+        border-radius: 3px;
+    }
+    .dish-step-text .dish-step-number{
+        display: none;
+    }
+    .dish-step-text .pl-4{
+        display: none;
+    }
+    .dish-description p {
+        text-align: justify;
+    }
+    .dish-step-text p {
+        text-align: justify;
+        color: #555555;
+    }
+</style>
 <!-- Single Page -->
 <div id="dish-detail-wrapper" class="banner-bootom-w3-agileits py-4">
     <div class="container py-xl-1 py-lg-1">
@@ -96,7 +116,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li>
+                            {{!-- <li>
                                 <div>
                                     <div class="dish-info-stats-text">Độ khó</div>
                                     <div class="dish-info-stats-value">
@@ -104,10 +124,10 @@
                                         <span class="dish-info-stats-unit">/5</span>
                                     </div>
                                 </div>
-                            </li>
+                            </li> --}}
                         </ul>
                         <!-- Dish ingredients -->
-                        <div class="dish-ingredient my-4">
+                        {{!-- <div class="dish-ingredient my-4">
                             <h4 class="my-3">Nguyên liệu</h4>
                             <table class="table table-bordered">
                                 <tbody>
@@ -123,7 +143,7 @@
                                     {{/each}}
                                 </tbody>
                             </table>
-                        </div>
+                        </div> --}}
                     </div>
                     <!-- Dish instruction -->
                     <div class="dish-instruction my-4 pl-3 pr-3">
@@ -132,7 +152,7 @@
                             <div class="dish-step mb-2">
                                 <div class="dish-step-text">
                                     <span class="dish-step-number">Bước <span>{{number}}</span>: </span>
-                                    <span>{{description}}</span>
+                                    <p>{{description}}</p>
                                     {{#ifCond equipments '!=' ""}}
                                         <div class="pl-4"><b>Dụng cụ: </b>{{equipments}}</div>
                                     {{/ifCond}}

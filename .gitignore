@@ -61,10 +61,8 @@ typings/
 .next
 
 # bin directory
-bin
 
 # package-json.log
-package-lock.json
 
 # vscode directory
 .vscode
