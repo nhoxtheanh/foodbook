@@ -69,6 +69,17 @@
         .goAdvancedSearch{
             min-height: 39.125px;
         }
+        .search-label {
+            color: white; margin-left: 15px; margin-right: 25px;
+        }
+
+        .select2-selection.select2-selection--single {
+            min-width: 130px;min-height: 37px;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #444;
+            line-height: 37px;
+        }
     </style>
     <!-- top-header -->
     <div class="agile-main-top">
@@ -174,11 +185,55 @@
                 </div>
                 <!-- //logo -->
                 <!-- header-bot -->
-                <div class="col-md-6 header mt-2 mb-md-0 mb-2">
+                <div class="col-md-6 header mt-2 mb-md-0 mb-2"><hr>
                     <div class="row" style="padding-left: 100px;">
                         <!-- search -->
                         <div class="col-10 agileits_search" id="advancedSearch">
+                                <div class="row" style="margin-left: 0px">
+                                    <label class="search-label">Khu vực: </label>
+                                            <select class="select2-advanceSearch">
+                                                <option value="volvo">Tất cả</option>
+                                                <optgroup label="Sài Gòn">
+                                                    <option value="volvo">Quận 1</option>
+                                                    <option value="saab">Quận 5</option>
+                                                    <option value="saab">Hóc Môn</option>
+                                                </optgroup>
+                                                <optgroup label="Hà Nội">
+                                                    <option value="mercedes">Quận Ba Đình</option>
+                                                    <option value="audi">Quận Bắc Từ Liêm</option>
+                                                    <option value="mercedes">Quận Cầu Giấy</option>
+                                                    <option value="audi">Quận Hai Bà Trưng</option>
+                                                </optgroup>
+                                                <optgroup label="Đà Nẵng">
+                                                    <option value="mercedes">Quận Thanh Khê</option>
+                                                    <option value="audi">Quận Sơn Trà</option>
+                                                    <option value="mercedes">Quận Liên Chiểu</option>
+                                                    <option value="audi">Quận Hải Châu</option>
+                                                </optgroup>
+                                            </select>
+                                        <label class="search-label">Loại món ăn: </label>
+                                            <select class="select2-advanceSearch">
+                                                <option value="volvo">Tất cả</option>
+                                                <option value="1">Món chính</option>
+                                                <option value="2">Món phụ</option>
+                                                <option value="3">Tráng miệng</option>
+                                                <option value="4">Món khai vị</option>
+                                                <option value="5">Salad</option>
+                                                <option value="6">Bánh</option>
+                                                <option value="7">Ăn sáng</option>
+                                                <option value="8">Soup</option>
+                                                <option value="9">Thức uống</option>
+                                                <option value="10">Nước sốt</option>
+                                                <option value="11">Snack</option>
+                                                <option value="12">Ăn trưa</option>
+                                            </select>
+                                </div><br>
+                                <div class="row" style="margin-left: 0px">
+                                    <label class="search-label">Giá tiền: <span id="priceRangeValue"></span>đ</label>
+                                            <input type="range" class="form-range" min="10000" max="500000" step="10000" id="myRange" value="50000" style="min-width: 325px;" />
+                                </div><br>
                             <form id="searchDishesForm" name="searchDishesForm" class="form-inline input-group mb-2" action="/search" method="get">
+                                <label class="search-label">Từ khóa: </label>
                                 <div class="input-group-prepend">
                                     <button id="search-type-btn" class="search-type-display btn btn-outline-secondary dropdown-toggle"
                                         type="button" data-toggle="dropdown" aria-haspopup="true"
@@ -595,6 +650,14 @@
     <!-- popup modal (for location)-->
     <script type="text/javascript" src="/javascripts/jquery.magnific-popup.js"></script>
     <script type="text/javascript">
+        var slider = document.getElementById("myRange");
+        var output = document.getElementById("priceRangeValue");
+        output.innerHTML = slider.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Display the default slider value
+
+        // Update the current slider value (each time you drag the slider handle)
+        slider.oninput = function() {
+            output.innerHTML = this.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
         $(document).ready(function () {
             $('.popup-with-zoom-anim').magnificPopup({
                 type: 'inline',
@@ -609,6 +672,7 @@
             });
 
             //$('#advancedSearchArea').addClass('d-none');
+            $('.select2-advanceSearch').select2();
         });
 
         $('.goAdvancedSearch').on('click', function() {
@@ -616,6 +680,8 @@
             $('#normalSearchInput').toggleClass('d-none');
             $('#normalSearchBtn').toggleClass('d-none');
         });
+
+
     </script>
     <!-- //popup modal (for location)-->
 
