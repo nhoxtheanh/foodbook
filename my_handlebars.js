@@ -28,6 +28,14 @@ hbs.registerHelper("parseDateTime", function(dateString, seperator) {
     const date = new Date(dateString);
     return [("0" + date.getDate()).slice(-2), ("0" + (date.getMonth() + 1)).slice(-2), date.getFullYear()].join(seperator) + ' ' + [("0" + date.getHours()).slice(-2), ("0" + date.getMinutes()).slice(-2)].join(':');
 });
+hbs.registerHelper("DateTimeToPrice", function(dateString, seperator) {
+    seperator = seperator || '-';
+    const date = new Date(dateString);
+    let price = date.getSeconds()*1000;
+    let priceString = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    priceString+="đ";
+    return priceString;
+});
 hbs.registerHelper("numberWithCommas", function(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 });

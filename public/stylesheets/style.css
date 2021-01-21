@@ -1493,6 +1493,11 @@ a.dish-type-item {
     font-size: 0.8em;
     font-style: italic;
 }
+.item-info .item-info-createdDate {
+    font-size: 1.2em;
+    font-weight: bold;
+    font-style: italic;
+}
 .item-info-footer {
     border-top: .5px solid #eee;
     margin-top: 5px;
