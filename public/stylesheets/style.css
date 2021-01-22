@@ -3071,5 +3071,35 @@ input[type="file"] {
     margin: 20px auto;
 }
 
-
+input.search-keyword.form-control {
+    height: calc(2.25rem + 2px)!important;
+}
+input.form-range {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    height: 5px; /* Specified height */
+    border-radius: 5px;  
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+    margin-top: 10px;
+  }
+input.form-range::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    border-radius: 50%; 
+    background: rgb(244, 92, 93); /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+input.form-range::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    border-radius: 50%; 
+    background: rgb(244, 92, 93); /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
 /*--//responsive--*/
