@@ -13,7 +13,7 @@ require('dotenv').config();
 require('./database/db');
 
 // Set default variables from database
-require('./default-variables.config.js');
+// require('./default-variables.config.js');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
